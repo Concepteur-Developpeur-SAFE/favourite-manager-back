@@ -6,6 +6,8 @@ namespace FavouriteManager.Services
     {
         long Test(int id);
         List<Favourite> FilterByCategory(long id);
+        List<Favourite> SortByCategory();
+        List<Favourite> SortByDate();
     }
 
 }
