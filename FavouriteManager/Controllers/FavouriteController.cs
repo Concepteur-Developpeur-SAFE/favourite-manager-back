@@ -19,6 +19,12 @@ namespace FavouriteManager.Controllers
             return _favouriteService.Test(id);
         }
 
-        
+        [HttpGet("filter/{category}")]
+        public List<Favourite> FilterByCategory(long id)
+        {
+            return _favouriteService.FilterByCategory(id);
+        }
+
+
     }
 }
