@@ -64,14 +64,13 @@ namespace FavouriteManagerTest
 
                 //delete the in-memory database after each test
                 context.Database.EnsureDeleted();
-            }
 
-            // Assert
-            Assert.IsNotNull(filteredFavourites);
-            Assert.AreEqual(2, filteredFavourites.Count);
-            context.Database.EnsureDeleted();
+                // Assert
+                Assert.IsNotNull(filteredFavourites);
+                Assert.AreEqual(2, filteredFavourites.Count);
+                context.Database.EnsureDeleted();
             }
-    }
+        }
         [TestMethod]
         public void CreateFavourite()
         {
@@ -173,9 +172,6 @@ namespace FavouriteManagerTest
             }
         }
         
-    }
-}
-
 
         [TestMethod]
         public void SortByCategory_Should_Return_Sorted_Favoris()
