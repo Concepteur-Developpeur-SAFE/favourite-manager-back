@@ -16,9 +16,9 @@ namespace FavouriteManager.Services.implementation
         {
             return _appDbContext.Test(id);
         }
-        public List<Favourite> FilterByCategory(string category)
+        public List<Favourite> FilterByCategory(long id)
         {
-            return _appDbContext.favourites.Where(fav => fav.Category.Label == category).ToList();
+            return _appDbContext.favourites.Where(fav => fav.Category.Id == id).ToList();
         }
     }
 }

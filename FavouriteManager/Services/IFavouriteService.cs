@@ -5,7 +5,7 @@ namespace FavouriteManager.Services
     public interface IFavouriteService
     {
         long Test(int id);
-        List<Favourite> FilterByCategory(string category);
+        List<Favourite> FilterByCategory(long id);
     }
 
 }

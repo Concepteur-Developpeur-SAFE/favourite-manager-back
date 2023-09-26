@@ -39,11 +39,15 @@ namespace FavouriteManagerTest
             //add mock data to in-memory database using context.Favourites.AddRange
             using (var context = new AppDBContext(options))
         {
-            context.favourites.AddRange(new List<Favourite>
+                Category cat1 = new Category(1, "CategoryA");
+                Category cat2 = new Category(2, "CategoryB");
+                context.favourites.AddRange(
+                
+                new List<Favourite>
             {
-                new Favourite { Id = 1, Link = "link1", Label = "link1", Category = new Category { Label = "CategoryA" } },
-                new Favourite { Id = 2, Link = "link1", Label = "link2", Category = new Category { Label = "CategoryB" } },
-                new Favourite { Id = 3, Link = "link1", Label = "link3", Category = new Category { Label = "CategoryA" } },
+                new Favourite { Id = 1, Link = "link1", Label = "link1", Category = cat2 },
+                new Favourite { Id = 2, Link = "link1", Label = "link2", Category = cat1 },
+                new Favourite { Id = 3, Link = "link1", Label = "link3", Category = cat1 },
             });
 
             context.SaveChanges();
@@ -51,7 +55,7 @@ namespace FavouriteManagerTest
             var favouriteService = new FavouriteService(context);
 
             // Act
-            var filteredFavourites = favouriteService.FilterByCategory("CategoryA");
+            var filteredFavourites = favouriteService.FilterByCategory(1);
 
             // Assert
             Assert.IsNotNull(filteredFavourites);
