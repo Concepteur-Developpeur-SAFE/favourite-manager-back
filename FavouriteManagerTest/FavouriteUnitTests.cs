@@ -158,6 +158,7 @@ namespace FavouriteManagerTest
                 List<long> ids = new List<long> { 1 };
                 favouriteService.Delete(ids);
                 List<Favourite> fav = context.favourites.ToList();
+
                 Assert.IsNotNull(fav);
                 Assert.AreEqual(1, fav.Count);
                 context.Database.EnsureDeleted();

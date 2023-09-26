@@ -74,8 +74,16 @@ namespace FavouriteManager.Services.implementation
         }
         public void Delete(List<long> ids)
         {
-            _appDbContext.favourites.Where(fav => ids.Contains(fav.Id)).ExecuteDelete();
-            
+            foreach (var id in ids)
+            {
+                var favToDelete = _appDbContext.favourites.FirstOrDefault(f => f.Id == id);
+                if (favToDelete != null)
+                {
+                    _appDbContext.favourites.Remove(favToDelete);
+                }
+                _appDbContext.SaveChanges();
+            }
+
         }
     }
 }
