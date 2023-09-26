@@ -12,7 +12,7 @@ namespace FavouriteManager.Services.implementation
         {
             _appDbContext = appDbContext;
         }
-        public Favourite Test(int id)
+        public long Test(int id)
         {
             return _appDbContext.Test(id);
         }

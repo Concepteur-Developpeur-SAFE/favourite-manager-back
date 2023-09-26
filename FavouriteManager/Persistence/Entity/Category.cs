@@ -14,5 +14,16 @@ namespace FavouriteManager.Persistence.entity
         public String Label { get; set; }
 
         public ICollection<Favourite> Favourites { get; }
+
+        public Category()
+        {
+
+        }
+
+        public Category(long Id, String Label)
+        {
+            this.Id = Id;
+            this.Label = Label;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace FavouriteManager.Controllers
             _favouriteService = favouriteService;
         }
         [HttpGet("{id}")]
-        public Favourite Test(int id)
+        public long Test(int id)
         {
             return _favouriteService.Test(id);
         }
