@@ -20,6 +20,7 @@ namespace FavouriteManager.Services.implementation
         }
         public List<Favourite> FilterByCategory(long id)
         {
+            // Using LINQ to filter favorites list by Category
             return _appDbContext.favourites.Where(fav => fav.Category.Id == id).ToList();
 ;
         }
@@ -84,6 +85,16 @@ namespace FavouriteManager.Services.implementation
                 _appDbContext.SaveChanges();
             }
 
+        }
+        public List<Favourite> SortByCategory()
+        {
+            // Using LINQ to sort list by Category
+            return _appDbContext.favourites.OrderBy(fav => fav.Category.Label).ToList();            
+        }
+        public List<Favourite> SortByDate()
+        {
+            // Using LINQ to sort list by Date
+            return _appDbContext.favourites.OrderBy(fav => fav.UpdatedAt).ToList();
         }
     }
 }

@@ -49,6 +49,17 @@ namespace FavouriteManager.Controllers
 
         }
 
+        [HttpGet("sortByCat")]
+        public List<Favourite> SortByCategory()
+        {
+            return _favouriteService.SortByCategory();
+        }
+
+        [HttpGet("sortByDate")]
+        public List<Favourite> SortByDate()
+        {
+            return _favouriteService.SortByDate();
+        }
 
     }
 }

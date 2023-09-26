@@ -12,6 +12,8 @@ namespace FavouriteManager.Services
 
         void Update(UpdateFavouriteRequest favourite);
         void Delete(List<long> ids);
+        List<Favourite> SortByCategory();
+        List<Favourite> SortByDate();
     }
 
 }
