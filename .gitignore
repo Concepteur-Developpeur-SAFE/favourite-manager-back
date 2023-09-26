@@ -396,3 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Migrations
+FavouriteManager/Migrations/
+
+bin/
+
+obj/

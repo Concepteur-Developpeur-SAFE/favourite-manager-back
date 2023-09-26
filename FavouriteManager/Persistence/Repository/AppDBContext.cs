@@ -21,12 +21,24 @@ namespace FavouriteManager.Data
                 .WithMany(x => x.Favourites)   // A category can have multiple favourites
                 .HasForeignKey(x => x.CategoryId);
         }
-        public Favourite Test(int id)
+        public long Test(int id)
         {
-            return (from x in favourites
+            Category category = new Category(3, "Cat3");
+
+            Favourite favourite1 = new Favourite(3, "Link2", "Label2", true, category, DateTime.Now);
+
+            favourites.Add(favourite1);
+
+            SaveChanges();
+            
+            Favourite fav = (from x in favourites
                     where x.Id == id
                     select x).FirstOrDefault();
+
+            return fav.CategoryId;
         }
+
+
 
     }
     

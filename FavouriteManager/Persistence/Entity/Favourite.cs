@@ -27,5 +27,16 @@ namespace FavouriteManager.Persistence.entity
         public DateTime UpdatedAt { get; set; }
 
 
+        public Favourite(long Id, String Link, String Label, bool IsValid, Category Category, DateTime UpdatedAt)
+        {
+            this.Id = Id;
+            this.Link = Link;
+            this.Label = Label;
+            this.IsValid = IsValid;
+            this.Category = Category;
+            this.UpdatedAt = UpdatedAt;
+        }
+
+        public Favourite() { }
     }
 }

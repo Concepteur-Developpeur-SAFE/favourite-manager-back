@@ -4,6 +4,6 @@ namespace FavouriteManager.Services
 {
     public interface IFavouriteService
     {
-        Favourite Test(int id);
+        long Test(int id);
     }
 }
