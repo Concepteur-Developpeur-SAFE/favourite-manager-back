@@ -1,3 +1,4 @@
+using FavouriteManager.DTO;
 using FavouriteManager.Persistence.entity;
 using FavouriteManager.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,29 @@ namespace FavouriteManager.Controllers
         public List<Favourite> FilterByCategory(long id)
         {
             return _favouriteService.FilterByCategory(id);
+        }
+        [HttpPost("create")]
+        public FavouriteResponse Create(CreateFavouriteRequest favourite)
+        {
+            return _favouriteService.Create(favourite);
+        }
+        [HttpGet("get")]
+        public List<FavouriteResponse> Get()
+        {
+            return _favouriteService.Get();
+        }
+        [HttpPost("update")]
+        public void Update(UpdateFavouriteRequest favourite)
+        {
+            
+            _favouriteService.Update(favourite);
+
+        }
+        [HttpDelete("delete")]
+        public void Delete(List<long> ids)
+        {
+           _favouriteService.Delete(ids);
+
         }
 
 
