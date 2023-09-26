@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using FavouriteManager.Persistence.entity;
-using System.Reflection.Metadata.Ecma335;
 
 namespace FavouriteManager.Data
 {
@@ -11,7 +8,9 @@ namespace FavouriteManager.Data
         public AppDBContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Favourite> favourites { get; set; }
+
         public DbSet<Category> categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -21,6 +20,7 @@ namespace FavouriteManager.Data
                 .WithMany(x => x.Favourites)   // A category can have multiple favourites
                 .HasForeignKey(x => x.CategoryId);
         }
+
         public long Test(int id)
         {
             Category category = new Category(3, "Cat3");
@@ -37,9 +37,5 @@ namespace FavouriteManager.Data
 
             return fav.CategoryId;
         }
-
-
-
     }
-    
 }

@@ -14,39 +14,38 @@ namespace FavouriteManager.Controllers
         {
             _favouriteService = favouriteService;
         }
-        [HttpGet("{id}")]
-        public long Test(int id)
-        {
-            return _favouriteService.Test(id);
-        }
 
-        [HttpGet("filter/{category}")]
-        public List<Favourite> FilterByCategory(long id)
-        {
-            return _favouriteService.FilterByCategory(id);
-        }
         [HttpPost("create")]
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
             return _favouriteService.Create(favourite);
         }
+
         [HttpGet("get")]
         public List<FavouriteResponse> Get()
         {
             return _favouriteService.Get();
         }
+
         [HttpPost("update")]
         public void Update(UpdateFavouriteRequest favourite)
         {
             
             _favouriteService.Update(favourite);
-
         }
+
         [HttpDelete("delete")]
         public void Delete(List<long> ids)
         {
            _favouriteService.Delete(ids);
 
+        }
+
+
+        [HttpGet("filter/{category}")]
+        public List<Favourite> FilterByCategory(long id)
+        {
+            return _favouriteService.FilterByCategory(id);
         }
 
         [HttpGet("sortByCat")]
@@ -60,6 +59,5 @@ namespace FavouriteManager.Controllers
         {
             return _favouriteService.SortByDate();
         }
-
     }
 }

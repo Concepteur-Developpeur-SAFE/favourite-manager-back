@@ -1,29 +1,18 @@
 ﻿using FavouriteManager.Data;
-using System.Collections.Generic;
-using System.Linq;
 using FavouriteManager.Persistence.entity;
 using FavouriteManager.DTO;
-using Microsoft.EntityFrameworkCore;
 
 namespace FavouriteManager.Services.implementation
 {
     public class FavouriteService : IFavouriteService
     {
         private readonly AppDBContext _appDbContext;
+
         public FavouriteService(AppDBContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        public long Test(int id)
-        {
-            return _appDbContext.Test(id);
-        }
-        public List<Favourite> FilterByCategory(long id)
-        {
-            // Using LINQ to filter favorites list by Category
-            return _appDbContext.favourites.Where(fav => fav.Category.Id == id).ToList();
-;
-        }
+
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
             Favourite newFavourite = new Favourite {
@@ -43,9 +32,8 @@ namespace FavouriteManager.Services.implementation
                 new CategoryResponse(newFavourite.Category.Id, newFavourite.Category.Label),
                 newFavourite.UpdatedAt
                 );
-
-
         }
+
         public List<FavouriteResponse> Get()
         {
             List<FavouriteResponse> favResponseList = _appDbContext.favourites.Select(
@@ -57,9 +45,8 @@ namespace FavouriteManager.Services.implementation
                    fav.UpdatedAt
                    )).ToList();
             return favResponseList;
-
-
         }
+
         public void Update(UpdateFavouriteRequest favourite)
         {
             _appDbContext.favourites.Where(fav => fav.Id == favourite.Id).ToList().ForEach(
@@ -73,6 +60,7 @@ namespace FavouriteManager.Services.implementation
              );
             _appDbContext.SaveChanges();
         }
+
         public void Delete(List<long> ids)
         {
             foreach (var id in ids)
@@ -84,13 +72,20 @@ namespace FavouriteManager.Services.implementation
                 }
                 _appDbContext.SaveChanges();
             }
-
         }
+
+        public List<Favourite> FilterByCategory(long id)
+        {
+            // Using LINQ to filter favorites list by Category
+            return _appDbContext.favourites.Where(fav => fav.Category.Id == id).ToList();
+        }
+
         public List<Favourite> SortByCategory()
         {
             // Using LINQ to sort list by Category
             return _appDbContext.favourites.OrderBy(fav => fav.Category.Label).ToList();            
         }
+
         public List<Favourite> SortByDate()
         {
             // Using LINQ to sort list by Date
