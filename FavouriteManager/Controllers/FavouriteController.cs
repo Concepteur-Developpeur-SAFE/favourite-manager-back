@@ -19,9 +19,11 @@ namespace FavouriteManager.Controllers
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
             return _favouriteService.Create(favourite);
+            
         }
 
         [HttpGet("get")]
+     
         public List<FavouriteResponse> Get()
         {
             return _favouriteService.Get();
