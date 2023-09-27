@@ -9,14 +9,20 @@ namespace FavouriteManager.Persistence.entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
         public long Id {  get; set; }
+
+        [Required]
         [Column]
         public String Link { get; set; }
+
+        [Required]
         [Column]
         public String Label { get; set; }
         [Column]
         public bool IsValid { get; set; }
         
         public Category Category { get; set; }
+
+        [Required]
         [Column]
         public long CategoryId {  get; set; }
         [Column]
