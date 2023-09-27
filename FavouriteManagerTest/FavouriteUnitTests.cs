@@ -3,6 +3,8 @@ using FavouriteManager.Persistence.entity;
 using FavouriteManager.Data;
 using Microsoft.EntityFrameworkCore;
 using FavouriteManager.DTO;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 
 namespace FavouriteManagerTest
 {
@@ -252,6 +254,43 @@ namespace FavouriteManagerTest
                 }
             }
             return true;
+        }
+
+        [TestMethod]
+        public async Task CheckLinksAsync_Should_MarkBrokenLinks()
+        {
+            // Arrange
+            using (var context = new AppDBContext(options))
+            {
+                context.Database.EnsureCreated();
+                Category catA = new Category(1, "dev");
+                Category catB = new Category(2, "agility");
+                context.favourites.AddRange(
+
+                new List<Favourite>
+            {
+                new Favourite { Id = 1, Link = "https://example.com/nonexistent", Label = "link1", Category = catA, UpdatedAt = DateTime.Now.AddHours(-2) },
+                new Favourite { Id = 2, Link = "https://www.google.fr", Label = "link3", Category = catB, UpdatedAt = DateTime.Now.AddHours(-1) },
+            });
+
+                context.SaveChanges();
+                var httpClientHandler = new HttpClientHandler();
+
+                var httpClient = new HttpClient(httpClientHandler);
+                var favouriteService = new FavouriteService(context, httpClient);
+                var favourites = await context.favourites.ToListAsync();
+
+                // Act
+                await favouriteService.CheckLinksAsync(favourites[0]);
+                await favouriteService.CheckLinksAsync(favourites[1]);
+
+                // Assert
+                Assert.IsFalse(favourites[0].IsValid);
+                Assert.IsTrue(favourites[1].IsValid);
+
+                //delete the in-memory database after each test
+                context.Database.EnsureDeleted();
+            }
         }
     }
 }
