@@ -1,6 +1,7 @@
 ﻿using FavouriteManager.Data;
 using FavouriteManager.Persistence.entity;
 using FavouriteManager.DTO;
+using FavouriteManager.Exception;
 
 namespace FavouriteManager.Services.implementation
 {
@@ -21,7 +22,27 @@ namespace FavouriteManager.Services.implementation
                 Category = _appDbContext.categories.Where(cat => cat.Id == favourite.CategoryId).FirstOrDefault(),
                 UpdatedAt = DateTime.Now
             };
+            //Check if the category was found
+            if (newFavourite.Category == null)
+            {
+                throw new NotFoundException("id category not found !");
+            }
 
+            //Check if the added favorite already exists based on a criterion (Link)
+            bool exists = _appDbContext.favourites.Any(fav => fav.Link == newFavourite.Link);
+
+            if (exists)
+            {
+                //Throw an exception if the favorite already exists
+                throw new FavoriteAlreadyExistsException("The favorite already exists.");
+            }
+
+            if (string.IsNullOrWhiteSpace(newFavourite.Link) || string.IsNullOrWhiteSpace(newFavourite.Label) || newFavourite.Category == null)
+            {
+                throw new ValidationException("The favorite must contain all the required information (Link, Label, Category).");
+            }
+
+            //If the favorite does not yet exist, add it to the list of existing favorites          
             _appDbContext.favourites.Add(newFavourite);
             _appDbContext.SaveChanges();
 
