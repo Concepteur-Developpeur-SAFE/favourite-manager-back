@@ -9,6 +9,7 @@ namespace FavouriteManager.Persistence.entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+        [Required]
         [Column]
         public String Label { get; set; }
 
