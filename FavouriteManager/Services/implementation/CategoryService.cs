@@ -1,5 +1,6 @@
 ﻿using FavouriteManager.Data;
 using FavouriteManager.DTO;
+using FavouriteManager.Exception;
 using FavouriteManager.Persistence.entity;
 
 namespace FavouriteManager.Services.implementation
@@ -19,6 +20,19 @@ namespace FavouriteManager.Services.implementation
             {
                 Label = category.Label
             };
+            //Check if the added category already exists based on a criterion (Label)
+            bool exists = _appDbContext.categories.Any(cat => cat.Label == newCategory.Label);
+
+            if (exists)
+            {
+                //Throw an exception if the favorite already exists
+                throw new FavoriteAlreadyExistsException("The category already exists.");
+            }
+
+            if (string.IsNullOrWhiteSpace(newCategory.Label))
+            {
+                throw new ValidationException("The favorite must contain the required information (Label).");
+            }
 
             _appDbContext.categories.Add(newCategory);
             _appDbContext.SaveChanges();
