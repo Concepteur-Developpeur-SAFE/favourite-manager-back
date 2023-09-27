@@ -2,6 +2,6 @@
 {
     public class ValidationException : IOException
     {
-        public ValidationException(string message) : base(message) { }
+        public ValidationException() : base() { }
     }
 }

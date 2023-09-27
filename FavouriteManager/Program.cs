@@ -2,6 +2,7 @@ using FavouriteManager.Services.implementation;
 using FavouriteManager.Services;
 using FavouriteManager.Data;
 using Microsoft.EntityFrameworkCore;
+using FavouriteManager.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 Console.WriteLine(builder);
@@ -27,5 +28,5 @@ app.UseExceptionHandler("/error");
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 app.Run();

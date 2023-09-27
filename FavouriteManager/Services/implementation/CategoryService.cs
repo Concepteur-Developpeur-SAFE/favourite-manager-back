@@ -26,12 +26,12 @@ namespace FavouriteManager.Services.implementation
             if (exists)
             {
                 //Throw an exception if the favorite already exists
-                throw new FavoriteAlreadyExistsException("The category already exists.");
+                throw new FavoriteAlreadyExistsException();
             }
 
             if (string.IsNullOrWhiteSpace(newCategory.Label))
             {
-                throw new ValidationException("The favorite must contain the required information (Label).");
+                throw new ValidationException();
             }
 
             _appDbContext.categories.Add(newCategory);

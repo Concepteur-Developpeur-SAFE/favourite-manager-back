@@ -25,16 +25,19 @@ namespace FavouriteManager.Services.implementation
 
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
-            Favourite newFavourite = new Favourite {
+            Category category = _appDbContext.categories.Where(cat => cat.Id == favourite.CategoryId).FirstOrDefault();
+  
+            Favourite newFavourite = new Favourite
+            {
                 Link = favourite.Link,
                 Label = favourite.Label,
-                Category = _appDbContext.categories.Where(cat => cat.Id == favourite.CategoryId).FirstOrDefault(),
+                Category = category,
                 UpdatedAt = DateTime.Now
             };
             //Check if the category was found
-            if (newFavourite.Category == null)
+            if (category == null)
             {
-                throw new NotFoundException("id category not found !");
+                throw new NotFoundException();
             }
 
             //Check if the added favorite already exists based on a criterion (Link)
@@ -43,12 +46,12 @@ namespace FavouriteManager.Services.implementation
             if (exists)
             {
                 //Throw an exception if the favorite already exists
-                throw new FavoriteAlreadyExistsException("The favorite already exists.");
+                throw new FavoriteAlreadyExistsException();
             }
 
             if (string.IsNullOrWhiteSpace(newFavourite.Link) || string.IsNullOrWhiteSpace(newFavourite.Label) || newFavourite.Category == null)
             {
-                throw new ValidationException("The favorite must contain all the required information (Link, Label, Category).");
+                throw new ValidationException();
             }
 
             //Check if the added favorite link is valid

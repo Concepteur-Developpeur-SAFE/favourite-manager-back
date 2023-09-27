@@ -2,6 +2,6 @@
 {
     public class FavoriteAlreadyExistsException : IOException
     {
-        public FavoriteAlreadyExistsException(string message) : base(message) { }
+        public FavoriteAlreadyExistsException() : base() { }
     }
 }
