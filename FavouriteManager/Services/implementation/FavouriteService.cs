@@ -2,16 +2,25 @@
 using FavouriteManager.Persistence.entity;
 using FavouriteManager.DTO;
 using FavouriteManager.Exception;
+using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using System;
 
 namespace FavouriteManager.Services.implementation
 {
     public class FavouriteService : IFavouriteService
     {
         private readonly AppDBContext _appDbContext;
+        private readonly HttpClient _httpClient;
 
         public FavouriteService(AppDBContext appDbContext)
         {
             _appDbContext = appDbContext;
+        }
+        public FavouriteService(AppDBContext appDbContext, HttpClient httpClient)
+        {
+            _appDbContext = appDbContext;
+            _httpClient = httpClient;
         }
 
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
@@ -41,6 +50,9 @@ namespace FavouriteManager.Services.implementation
             {
                 throw new ValidationException("The favorite must contain all the required information (Link, Label, Category).");
             }
+
+            //Check if the added favorite link is valid
+            CheckLinksAsync(newFavourite);
 
             //If the favorite does not yet exist, add it to the list of existing favorites          
             _appDbContext.favourites.Add(newFavourite);
@@ -111,6 +123,19 @@ namespace FavouriteManager.Services.implementation
         {
             // Using LINQ to sort list by Date
             return _appDbContext.favourites.OrderBy(fav => fav.UpdatedAt).ToList();
+        }
+
+        public async Task CheckLinksAsync(Favourite fav)
+        {
+            var response = await _httpClient.GetAsync(fav.Link);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    fav.IsValid = true;
+                } else
+                {
+                    fav.IsValid = false;
+                }           
         }
     }
 }
