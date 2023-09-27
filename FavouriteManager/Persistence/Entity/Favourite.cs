@@ -1,12 +1,8 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 
 namespace FavouriteManager.Persistence.entity
 {
-
     [Table("Favourite")]
     public class Favourite
     {

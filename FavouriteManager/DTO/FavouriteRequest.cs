@@ -1,6 +1,4 @@
-﻿using FavouriteManager.Persistence.entity;
-
-namespace FavouriteManager.DTO
+﻿namespace FavouriteManager.DTO
 {
     public record CreateFavouriteRequest(
         string Label,
@@ -15,15 +13,23 @@ namespace FavouriteManager.DTO
         DateTime UpdatedAt
 
     );
-    public record CategoryResponse(
-        long Id,
-        string Label
-
-    );
     public record UpdateFavouriteRequest(
         long Id,
         string Label,
         string Link,
         long CategoryId
+    );
+    public record CategoryResponse(
+        long Id,
+        string Label
+    );
+
+    public record CreateCategoryRequest(
+        string Label
+    );
+
+    public record UpdateCategoryRequest(
+        long Id,
+        string Label
     );
 }
