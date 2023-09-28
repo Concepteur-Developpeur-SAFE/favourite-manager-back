@@ -44,7 +44,7 @@ namespace FavouriteManager.Controllers
         }
 
 
-        [HttpGet("filter/{category}")]
+        [HttpGet("filter/{id}")]
         public List<Favourite> FilterByCategory(long id)
         {
             return _favouriteService.FilterByCategory(id);
