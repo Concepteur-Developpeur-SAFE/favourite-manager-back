@@ -56,10 +56,22 @@ namespace FavouriteManager.Controllers
             return _favouriteService.SortByCategory();
         }
 
+        [HttpGet("sortByCatDesc")]
+        public List<FavouriteResponse> SortByCategoryDesc()
+        {
+            return _favouriteService.SortByCategoryDesc();
+        }
+
         [HttpGet("sortByDate")]
         public List<FavouriteResponse> SortByDate()
         {
             return _favouriteService.SortByDate();
+        }
+
+        [HttpGet("sortByDateDesc")]
+        public List<FavouriteResponse> SortByDateDesc()
+        {
+            return _favouriteService.SortByDateDesc();
         }
     }
 }
