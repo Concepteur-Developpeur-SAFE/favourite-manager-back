@@ -13,11 +13,11 @@ namespace FavouriteManager.Services
 
         void Delete(List<long> ids);
 
-        List<Favourite> FilterByCategory(long id);
+        List<FavouriteResponse> FilterByCategory(long id);
 
-        List<Favourite> SortByCategory();
+        List<FavouriteResponse> SortByCategory();
 
-        List<Favourite> SortByDate();
+        List<FavouriteResponse> SortByDate();
     }
 
 }

@@ -44,20 +44,20 @@ namespace FavouriteManager.Controllers
         }
 
 
-        [HttpGet("filter/{category}")]
-        public List<Favourite> FilterByCategory(long id)
+        [HttpGet("filter/{id}")]
+        public List<FavouriteResponse> FilterByCategory(long id)
         {
             return _favouriteService.FilterByCategory(id);
         }
 
         [HttpGet("sortByCat")]
-        public List<Favourite> SortByCategory()
+        public List<FavouriteResponse> SortByCategory()
         {
             return _favouriteService.SortByCategory();
         }
 
         [HttpGet("sortByDate")]
-        public List<Favourite> SortByDate()
+        public List<FavouriteResponse> SortByDate()
         {
             return _favouriteService.SortByDate();
         }
