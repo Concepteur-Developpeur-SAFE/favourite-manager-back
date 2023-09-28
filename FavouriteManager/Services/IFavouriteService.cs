@@ -16,8 +16,10 @@ namespace FavouriteManager.Services
         List<FavouriteResponse> FilterByCategory(long id);
 
         List<FavouriteResponse> SortByCategory();
+        List<FavouriteResponse> SortByCategoryDesc();
 
         List<FavouriteResponse> SortByDate();
+        List<FavouriteResponse> SortByDateDesc();
     }
 
 }

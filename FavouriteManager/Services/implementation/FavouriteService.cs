@@ -123,10 +123,21 @@ namespace FavouriteManager.Services.implementation
             return Get().OrderBy(fav => fav.Category.Label).ToList();            
         }
 
+        public List<FavouriteResponse> SortByCategoryDesc()
+        {
+            // Using LINQ to sort list by Category
+            return Get().OrderByDescending(fav => fav.Category.Label).ToList();
+        }
+
         public List<FavouriteResponse> SortByDate()
         {
             // Using LINQ to sort list by Date
             return Get().OrderBy(fav => fav.UpdatedAt).ToList();
+        }
+        public List<FavouriteResponse> SortByDateDesc()
+        {
+            // Using LINQ to sort list by Date
+            return Get().OrderByDescending(fav => fav.UpdatedAt).ToList();
         }
 
         public async Task CheckLinksAsync(Favourite fav)
