@@ -5,23 +5,24 @@ using FavouriteManager.Exception;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
 using System;
+using System.Net;
 
 namespace FavouriteManager.Services.implementation
 {
     public class FavouriteService : IFavouriteService
     {
         private readonly AppDBContext _appDbContext;
-        private readonly HttpClient _httpClient;
+        //private readonly HttpClient _httpClient;
 
         public FavouriteService(AppDBContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        public FavouriteService(AppDBContext appDbContext, HttpClient httpClient)
+        /*public FavouriteService(AppDBContext appDbContext, HttpClient httpClient)
         {
             _appDbContext = appDbContext;
             _httpClient = httpClient;
-        }
+        }*/
 
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
@@ -110,35 +111,55 @@ namespace FavouriteManager.Services.implementation
             }
         }
 
-        public List<Favourite> FilterByCategory(long id)
+        public List<FavouriteResponse> FilterByCategory(long id)
         {
             // Using LINQ to filter favorites list by Category
-            return _appDbContext.favourites.Where(fav => fav.Category.Id == id).ToList();
+            return Get().Where(fav => fav.Category.Id == id).ToList();
+         
         }
 
-        public List<Favourite> SortByCategory()
+        public List<FavouriteResponse> SortByCategory()
         {
             // Using LINQ to sort list by Category
-            return _appDbContext.favourites.OrderBy(fav => fav.Category.Label).ToList();            
+            return Get().OrderBy(fav => fav.Category.Label).ToList();            
         }
 
-        public List<Favourite> SortByDate()
+        public List<FavouriteResponse> SortByCategoryDesc()
+        {
+            // Using LINQ to sort list by Category
+            return Get().OrderByDescending(fav => fav.Category.Label).ToList();
+        }
+
+        public List<FavouriteResponse> SortByDate()
         {
             // Using LINQ to sort list by Date
-            return _appDbContext.favourites.OrderBy(fav => fav.UpdatedAt).ToList();
+            return Get().OrderBy(fav => fav.UpdatedAt).ToList();
+        }
+        public List<FavouriteResponse> SortByDateDesc()
+        {
+            // Using LINQ to sort list by Date
+            return Get().OrderByDescending(fav => fav.UpdatedAt).ToList();
         }
 
         public async Task CheckLinksAsync(Favourite fav)
         {
-            var response = await _httpClient.GetAsync(fav.Link);
+            var httpClientHandler = new HttpClientHandler();
+            var httpClient = new HttpClient(httpClientHandler);
+            var response = await httpClient.GetAsync(fav.Link);
+            List<HttpStatusCode> allowedCodes = new List<HttpStatusCode>()
+            {
+                HttpStatusCode.BadRequest,
+                HttpStatusCode.Unauthorized,
+                HttpStatusCode.Forbidden
+            };
 
-                if (response.IsSuccessStatusCode)
-                {
-                    fav.IsValid = true;
-                } else
-                {
-                    fav.IsValid = false;
-                }           
+            if (response.IsSuccessStatusCode || allowedCodes.Contains(response.StatusCode))
+            {
+                fav.IsValid = true;
+            } else
+            {
+                fav.IsValid = false;
+            }           
         }
     }
 }

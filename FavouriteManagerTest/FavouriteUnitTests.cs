@@ -198,7 +198,7 @@ namespace FavouriteManagerTest
                 context.Database.EnsureDeleted();
             }
         }
-        private bool IsSortedByCategory(List<Favourite> favourites)
+        private bool IsSortedByCategory(List<FavouriteResponse> favourites)
         {
             for (int i = 0; i < favourites.Count - 1; i++)
             {
@@ -244,7 +244,7 @@ namespace FavouriteManagerTest
                 context.Database.EnsureDeleted();
             }
         }
-        private bool IsSortedByDate(List<Favourite> favourites)
+        private bool IsSortedByDate(List<FavouriteResponse> favourites)
         {
             for (int i = 0; i < favourites.Count - 1; i++)
             {
@@ -277,7 +277,7 @@ namespace FavouriteManagerTest
                 var httpClientHandler = new HttpClientHandler();
 
                 var httpClient = new HttpClient(httpClientHandler);
-                var favouriteService = new FavouriteService(context, httpClient);
+                var favouriteService = new FavouriteService(context);
                 var favourites = await context.favourites.ToListAsync();
 
                 // Act
