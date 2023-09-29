@@ -5,23 +5,24 @@ using FavouriteManager.Exception;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
 using System;
+using System.Net;
 
 namespace FavouriteManager.Services.implementation
 {
     public class FavouriteService : IFavouriteService
     {
         private readonly AppDBContext _appDbContext;
-        private readonly HttpClient _httpClient;
+        //private readonly HttpClient _httpClient;
 
         public FavouriteService(AppDBContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        public FavouriteService(AppDBContext appDbContext, HttpClient httpClient)
+        /*public FavouriteService(AppDBContext appDbContext, HttpClient httpClient)
         {
             _appDbContext = appDbContext;
             _httpClient = httpClient;
-        }
+        }*/
 
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
@@ -142,15 +143,23 @@ namespace FavouriteManager.Services.implementation
 
         public async Task CheckLinksAsync(Favourite fav)
         {
-            var response = await _httpClient.GetAsync(fav.Link);
+            var httpClientHandler = new HttpClientHandler();
+            var httpClient = new HttpClient(httpClientHandler);
+            var response = await httpClient.GetAsync(fav.Link);
+            List<HttpStatusCode> allowedCodes = new List<HttpStatusCode>()
+            {
+                HttpStatusCode.BadRequest,
+                HttpStatusCode.Unauthorized,
+                HttpStatusCode.Forbidden
+            };
 
-                if (response.IsSuccessStatusCode)
-                {
-                    fav.IsValid = true;
-                } else
-                {
-                    fav.IsValid = false;
-                }           
+            if (response.IsSuccessStatusCode || allowedCodes.Contains(response.StatusCode))
+            {
+                fav.IsValid = true;
+            } else
+            {
+                fav.IsValid = false;
+            }           
         }
     }
 }
