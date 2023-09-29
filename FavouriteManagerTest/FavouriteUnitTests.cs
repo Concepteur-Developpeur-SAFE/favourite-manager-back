@@ -277,7 +277,7 @@ namespace FavouriteManagerTest
                 var httpClientHandler = new HttpClientHandler();
 
                 var httpClient = new HttpClient(httpClientHandler);
-                var favouriteService = new FavouriteService(context, httpClient);
+                var favouriteService = new FavouriteService(context);
                 var favourites = await context.favourites.ToListAsync();
 
                 // Act
