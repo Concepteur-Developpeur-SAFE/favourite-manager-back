@@ -175,9 +175,7 @@ namespace FavouriteManagerTest
                 FavouriteResponse favorite3 = favouriteService.Create(fav3);
 
                 context.SaveChanges();
-
-                var favoritesInCategory1 = favouriteService.FilterByCategory(category1.Id);
-
+                
                 // Act
                 List<long> ids = new List<long> { 1 };
                 categoryService.Delete(ids);
