@@ -1,8 +1,8 @@
-﻿using FavouriteManager.Data;
-using FavouriteManager.DTO;
+﻿using FavouriteManager.DTO;
+using FavouriteManager.Data;
+using Microsoft.EntityFrameworkCore;
 using FavouriteManager.Persistence.entity;
 using FavouriteManager.Services.implementation;
-using Microsoft.EntityFrameworkCore;
 
 namespace FavouriteManagerTest
 {

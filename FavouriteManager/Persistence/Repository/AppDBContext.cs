@@ -37,7 +37,5 @@ namespace FavouriteManager.Data
                 .WithMany(x => x.Favourites)   // A category can have multiple favourites
                 .HasForeignKey(x => x.CategoryId);
         }
-
-
     }
 }

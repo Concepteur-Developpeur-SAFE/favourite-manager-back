@@ -1,5 +1,5 @@
-﻿using FavouriteManager.Data;
-using FavouriteManager.DTO;
+﻿using FavouriteManager.DTO;
+using FavouriteManager.Data;
 using FavouriteManager.Exception;
 using FavouriteManager.Persistence.entity;
 

@@ -1,15 +1,8 @@
-﻿using FavouriteManager.Services.implementation;
-using FavouriteManager.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FavouriteManager.DTO;
-using FavouriteManager.Persistence.entity;
-using Microsoft.Extensions.Options;
+﻿using FavouriteManager.DTO;
 using FavouriteManager.Data;
 using Microsoft.EntityFrameworkCore;
+using FavouriteManager.Persistence.entity;
+using FavouriteManager.Services.implementation;
 
 namespace FavouriteManagerTest
 {
@@ -107,7 +100,7 @@ namespace FavouriteManagerTest
 
                 context.Database.EnsureDeleted();
             }
-            }
+        }
 
         [TestMethod]
         public void SortFavoritesByCategory_Check()
@@ -241,6 +234,5 @@ namespace FavouriteManagerTest
                 context.Database.EnsureDeleted();
             }
         }
-
     }
 }

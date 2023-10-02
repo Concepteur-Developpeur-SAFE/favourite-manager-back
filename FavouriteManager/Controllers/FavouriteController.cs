@@ -1,7 +1,6 @@
 using FavouriteManager.DTO;
-using FavouriteManager.Persistence.entity;
-using FavouriteManager.Services;
 using Microsoft.AspNetCore.Mvc;
+using FavouriteManager.Services;
 
 namespace FavouriteManager.Controllers
 {
@@ -27,7 +26,6 @@ namespace FavouriteManager.Controllers
         public FavouriteResponse Create(CreateFavouriteRequest favourite)
         {
             return _favouriteService.Create(favourite);
-            
         }
 
         /// <summary>
@@ -47,7 +45,6 @@ namespace FavouriteManager.Controllers
         [HttpPost("update")]
         public void Update(UpdateFavouriteRequest favourite)
         {
-            
             _favouriteService.Update(favourite);
         }
 
@@ -59,7 +56,6 @@ namespace FavouriteManager.Controllers
         public void Delete(List<long> ids)
         {
            _favouriteService.Delete(ids);
-
         }
 
         /// <summary>
