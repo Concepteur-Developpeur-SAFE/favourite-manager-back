@@ -9,10 +9,17 @@ using System.Net;
 
 namespace FavouriteManager.Services.implementation
 {
+    /// <summary>
+    /// Service responsible for managing favorites.
+    /// </summary>
     public class FavouriteService : IFavouriteService
     {
         private readonly AppDBContext _appDbContext;
 
+        /// <summary>
+        /// Initializes a new instance of the FavoriteService service.
+        /// </summary>
+        /// <param name="appDbContext">The database context of the application.</param>
         public FavouriteService(AppDBContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -91,7 +98,6 @@ namespace FavouriteManager.Services.implementation
         /// Updates the information of an existing favorite in the database.
         /// </summary>
         /// <param name="favourite">The Favorite object to update with the new information.</param>
-        /// <returns>void (nothing)</returns>
         public void Update(UpdateFavouriteRequest favourite)
         {
             _appDbContext.favourites.Where(fav => fav.Id == favourite.Id).ToList().ForEach(
@@ -110,7 +116,6 @@ namespace FavouriteManager.Services.implementation
         /// Delete a list of favorite from the database based on its unique ids.
         /// </summary>
         /// <param name="ids">The list of unique ids of the favorites to delete.</param>
-        /// <returns>void (nothing).</returns>
         public void Delete(List<long> ids)
         {
             foreach (var id in ids)

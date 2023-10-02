@@ -3,6 +3,9 @@ using FavouriteManager.Persistence.entity;
 
 namespace FavouriteManager.Services
 {
+    /// <summary>
+    /// Interface defining service operations for managing favorites.
+    /// </summary>
     public interface IFavouriteService
     {
         FavouriteResponse Create(CreateFavouriteRequest favourite);
