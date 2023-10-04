@@ -1,8 +1,10 @@
 ﻿using FavouriteManager.DTO;
-using FavouriteManager.Persistence.entity;
 
 namespace FavouriteManager.Services
 {
+    /// <summary>
+    /// Interface defining service operations for managing favorites.
+    /// </summary>
     public interface IFavouriteService
     {
         FavouriteResponse Create(CreateFavouriteRequest favourite);
@@ -21,5 +23,4 @@ namespace FavouriteManager.Services
         List<FavouriteResponse> SortByDate();
         List<FavouriteResponse> SortByDateDesc();
     }
-
 }

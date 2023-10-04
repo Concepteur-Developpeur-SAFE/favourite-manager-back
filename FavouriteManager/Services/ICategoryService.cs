@@ -2,6 +2,9 @@
 
 namespace FavouriteManager.Services
 {
+    /// <summary>
+    /// Interface defining service operations for managing categories.
+    /// </summary>
     public interface ICategoryService
     {
         CategoryResponse Create(CreateCategoryRequest category);

@@ -1,10 +1,8 @@
-using FavouriteManager.Services.implementation;
-using FavouriteManager.Persistence.entity;
+using FavouriteManager.DTO;
 using FavouriteManager.Data;
 using Microsoft.EntityFrameworkCore;
-using FavouriteManager.DTO;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
+using FavouriteManager.Persistence.entity;
+using FavouriteManager.Services.implementation;
 
 namespace FavouriteManagerTest
 {
@@ -198,6 +196,7 @@ namespace FavouriteManagerTest
                 context.Database.EnsureDeleted();
             }
         }
+
         private bool IsSortedByCategory(List<FavouriteResponse> favourites)
         {
             for (int i = 0; i < favourites.Count - 1; i++)
@@ -244,6 +243,7 @@ namespace FavouriteManagerTest
                 context.Database.EnsureDeleted();
             }
         }
+
         private bool IsSortedByDate(List<FavouriteResponse> favourites)
         {
             for (int i = 0; i < favourites.Count - 1; i++)
@@ -294,4 +294,3 @@ namespace FavouriteManagerTest
         }
     }
 }
-
