@@ -1,5 +1,4 @@
 ﻿using FavouriteManager.DTO;
-using FavouriteManager.Persistence.entity;
 
 namespace FavouriteManager.Services
 {
@@ -24,5 +23,4 @@ namespace FavouriteManager.Services
         List<FavouriteResponse> SortByDate();
         List<FavouriteResponse> SortByDateDesc();
     }
-
 }

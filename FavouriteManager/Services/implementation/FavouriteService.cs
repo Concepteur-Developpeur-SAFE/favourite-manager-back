@@ -1,11 +1,8 @@
-﻿using FavouriteManager.Data;
-using FavouriteManager.Persistence.entity;
+﻿using System.Net;
 using FavouriteManager.DTO;
+using FavouriteManager.Data;
 using FavouriteManager.Exception;
-using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
-using System;
-using System.Net;
+using FavouriteManager.Persistence.entity;
 
 namespace FavouriteManager.Services.implementation
 {

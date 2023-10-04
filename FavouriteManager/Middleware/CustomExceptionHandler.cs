@@ -1,6 +1,5 @@
-﻿
+﻿using System.Text.Json;
 using FavouriteManager.Exception;
-using System.Text.Json;
 
 namespace FavouriteManager.Middleware
 {
@@ -71,5 +70,4 @@ namespace FavouriteManager.Middleware
             return context.Response.WriteAsync(jsonResponse);
         }
     }
-
 }

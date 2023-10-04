@@ -1,6 +1,6 @@
 ﻿using FavouriteManager.DTO;
-using FavouriteManager.Services;
 using Microsoft.AspNetCore.Mvc;
+using FavouriteManager.Services;
 
 namespace FavouriteManager.Controllers
 {

@@ -1,7 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http.HttpResults;
-
-namespace FavouriteManager.Exception
+﻿namespace FavouriteManager.Exception
 {
     /// <summary>
     /// Exception thrown when a resource is not found.
